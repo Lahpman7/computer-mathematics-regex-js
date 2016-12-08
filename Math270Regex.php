@@ -14,8 +14,8 @@
               <span id="confirmZip" class="confirmMessage"></span><br>
               <b>Class </b><br><input type="text" id = "class" name="class" onkeyup="checkClass();"><br>
               <span id="confirmClass" class="confirmMessage"></span><br>
-              <b>Password</b><br><input type="text" id = "pass" name="pass"><br>
-              <span id="confirmPass" class="confirmMessage">Nothing Entered Yet....</span><br>
+              <b>Password</b><br><input type="password" id = "pass" name="pass" onkeyup="checkPw();"><br>
+              <span id="confirmPass" class="confirmMessage"></span><br>
 
         </form>
     </body>
@@ -68,7 +68,7 @@
         var message = document.getElementById("confirmOtter");
         var goodColor = "#66cc66";
         var badColor = "#ff6666";
-        var boolShit = /[a-z]{4}[0-9]{4}/.test(name);
+        var boolShit = /[a-z]{4}[0-9]{4}$/.test(name);
         
         if(boolShit){
             
@@ -140,4 +140,25 @@
             document.getElementById("confirmClass").innerHTML = "Regex Mismatch, correct format is MATH 270";
         }
     }
+    function checkPw(){
+        var name = document.getElementById('pass').value;
+        var message = document.getElementById("confirmPass");
+        var goodColor = "#66cc66";
+        var badColor = "#ff6666";
+        var boolShit = /^(?=.*[A-Z])(?=.*[$@$!%#*?&])[A-Za-z\d$@#$!%*?&]{5,}/.test(name);
+        
+        if(boolShit){
+            document.getElementById('pass').style.backgroundColor = goodColor;
+            document.getElementById("confirmPass").style.color = goodColor;
+            document.getElementById("confirmClass").innerHTML = "Regex Match!";
+        }
+        else{
+            document.getElementById('pass').style.backgroundColor = badColor;
+            document.getElementById("confirmPass").style.color = badColor;
+            document.getElementById("confirmPass").innerHTML = 
+            "Regex Mismatch, You must have at least 5 characters, one uppercase and one special character!";
+        }
+    }
+    
+
 </script>
